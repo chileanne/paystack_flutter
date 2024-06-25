@@ -1,0 +1,25 @@
+name: paystack_flutter_example
+description: "Demonstrates how to use the paystack_flutter plugin."
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.3.4 <4.0.0'
+
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  paystack_flutter:
+    path: ../
+
+
+flutter:
+  uses-material-design: true
+
