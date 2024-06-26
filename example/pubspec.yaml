@@ -16,7 +16,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  paystack_flutter:
+  paystack_flutter_sa:
     path: ../
 
 

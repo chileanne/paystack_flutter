@@ -3,18 +3,18 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:paystack_flutter/src/api/model/transaction_api_response.dart';
-import 'package:paystack_flutter/src/common/exceptions.dart';
-import 'package:paystack_flutter/src/common/paystack.dart';
-import 'package:paystack_flutter/src/common/utils.dart';
-import 'package:paystack_flutter/src/models/card.dart';
-import 'package:paystack_flutter/src/models/charge.dart';
-import 'package:paystack_flutter/src/models/checkout_response.dart';
-import 'package:paystack_flutter/src/models/transaction.dart';
-import 'package:paystack_flutter/src/widgets/birthday_widget.dart';
-import 'package:paystack_flutter/src/widgets/card_widget.dart';
-import 'package:paystack_flutter/src/widgets/otp_widget.dart';
-import 'package:paystack_flutter/src/widgets/pin_widget.dart';
+import 'package:paystack_flutter_sa/src/api/model/transaction_api_response.dart';
+import 'package:paystack_flutter_sa/src/common/exceptions.dart';
+import 'package:paystack_flutter_sa/src/common/paystack.dart';
+import 'package:paystack_flutter_sa/src/common/utils.dart';
+import 'package:paystack_flutter_sa/src/models/card.dart';
+import 'package:paystack_flutter_sa/src/models/charge.dart';
+import 'package:paystack_flutter_sa/src/models/checkout_response.dart';
+import 'package:paystack_flutter_sa/src/models/transaction.dart';
+import 'package:paystack_flutter_sa/src/widgets/birthday_widget.dart';
+import 'package:paystack_flutter_sa/src/widgets/card_widget.dart';
+import 'package:paystack_flutter_sa/src/widgets/otp_widget.dart';
+import 'package:paystack_flutter_sa/src/widgets/pin_widget.dart';
 
 abstract class BaseTransactionManager {
   bool processing = false;
@@ -44,9 +44,11 @@ abstract class BaseTransactionManager {
     }
   }
 
-  Future<CheckoutResponse> handleApiResponse(TransactionApiResponse apiResponse);
+  Future<CheckoutResponse> handleApiResponse(
+      TransactionApiResponse apiResponse);
 
-  Future<CheckoutResponse> _initApiResponse(TransactionApiResponse? apiResponse) {
+  Future<CheckoutResponse> _initApiResponse(
+      TransactionApiResponse? apiResponse) {
     apiResponse ??= TransactionApiResponse.unknownServerResponse();
 
     transaction.loadFromResponse(apiResponse);
@@ -54,7 +56,8 @@ abstract class BaseTransactionManager {
     return handleApiResponse(apiResponse);
   }
 
-  Future<CheckoutResponse> handleServerResponse(Future<TransactionApiResponse> future) async {
+  Future<CheckoutResponse> handleServerResponse(
+      Future<TransactionApiResponse> future) async {
     try {
       final apiResponse = await future;
       return _initApiResponse(apiResponse);
@@ -69,7 +72,14 @@ abstract class BaseTransactionManager {
     if (e is TimeoutException || e is SocketException) {
       e = 'Please  check your internet connection or try again later';
     }
-    return CheckoutResponse(message: e.toString(), reference: transaction.reference, status: false, card: charge.card?..nullifyNumber(), account: charge.account, method: checkoutMethod(), verify: e is! PaystackException);
+    return CheckoutResponse(
+        message: e.toString(),
+        reference: transaction.reference,
+        status: false,
+        card: charge.card?..nullifyNumber(),
+        account: charge.account,
+        method: checkoutMethod(),
+        verify: e is! PaystackException);
   }
 
   setProcessingOff() => processing = false;
@@ -77,7 +87,10 @@ abstract class BaseTransactionManager {
   setProcessingOn() => processing = true;
 
   Future<CheckoutResponse> getCardInfoFrmUI(PaymentCard? currentCard) async {
-    PaymentCard? newCard = await showDialog<PaymentCard>(barrierDismissible: false, context: context, builder: (BuildContext context) => CardInputWidget(currentCard));
+    PaymentCard? newCard = await showDialog<PaymentCard>(
+        barrierDismissible: false,
+        context: context,
+        builder: (BuildContext context) => CardInputWidget(currentCard));
 
     if (newCard == null || !newCard.isValid()) {
       return notifyProcessingError(CardException('Invalid card parameters'));
@@ -87,21 +100,32 @@ abstract class BaseTransactionManager {
     }
   }
 
-  Future<CheckoutResponse> getOtpFrmUI({String? message, TransactionApiResponse? response}) async {
+  Future<CheckoutResponse> getOtpFrmUI(
+      {String? message, TransactionApiResponse? response}) async {
     assert(message != null || response != null);
-    String? otp = await showDialog<String>(context: context, barrierDismissible: false, builder: (BuildContext context) => OtpWidget(message: message ?? (response!.displayText == null || response.displayText!.isEmpty ? response.message : response.displayText)));
+    String? otp = await showDialog<String>(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) => OtpWidget(
+            message: message ??
+                (response!.displayText == null || response.displayText!.isEmpty
+                    ? response.message
+                    : response.displayText)));
 
     if (otp != null && otp.isNotEmpty) {
       return handleOtpInput(otp, response);
     } else {
-      return notifyProcessingError(PaystackException("You did not provide an OTP"));
+      return notifyProcessingError(
+          PaystackException("You did not provide an OTP"));
     }
   }
 
   Future<CheckoutResponse> getAuthFrmUI(String? url) async {
-    TransactionApiResponse apiResponse = TransactionApiResponse.unknownServerResponse();
+    TransactionApiResponse apiResponse =
+        TransactionApiResponse.unknownServerResponse();
 
-    String? result = await Utils.methodChannel.invokeMethod<String>('getAuthorization', {"authUrl": url});
+    String? result = await Utils.methodChannel
+        .invokeMethod<String>('getAuthorization', {"authUrl": url});
 
     if (result != null) {
       try {
@@ -113,40 +137,58 @@ abstract class BaseTransactionManager {
   }
 
   Future<CheckoutResponse> getPinFrmUI() async {
-    String? pin = await showDialog<String>(barrierDismissible: false, context: context, builder: (BuildContext context) => PinWidget());
+    String? pin = await showDialog<String>(
+        barrierDismissible: false,
+        context: context,
+        builder: (BuildContext context) => PinWidget());
 
     if (pin != null && pin.length == 4) {
       return handlePinInput(pin);
     } else {
-      return notifyProcessingError(PaystackException("PIN must be exactly 4 digits"));
+      return notifyProcessingError(
+          PaystackException("PIN must be exactly 4 digits"));
     }
   }
 
-  Future<CheckoutResponse> getBirthdayFrmUI(TransactionApiResponse response) async {
+  Future<CheckoutResponse> getBirthdayFrmUI(
+      TransactionApiResponse response) async {
     String? birthday = await showDialog<String>(
         barrierDismissible: false,
         context: context,
         builder: (BuildContext context) {
-          var messageText = response.displayText == null || response.displayText!.isEmpty ? response.message! : response.displayText!;
+          var messageText =
+              response.displayText == null || response.displayText!.isEmpty
+                  ? response.message!
+                  : response.displayText!;
           return BirthdayWidget(message: messageText);
         });
 
     if (birthday != null && birthday.isNotEmpty) {
       return handleBirthdayInput(birthday, response);
     } else {
-      return notifyProcessingError(PaystackException("Date of birth not supplied"));
+      return notifyProcessingError(
+          PaystackException("Date of birth not supplied"));
     }
   }
 
   CheckoutResponse onSuccess(Transaction transaction) {
-    return CheckoutResponse(message: transaction.message, reference: transaction.reference, status: true, card: charge.card?..nullifyNumber(), account: charge.account, method: checkoutMethod(), verify: true);
+    return CheckoutResponse(
+        message: transaction.message,
+        reference: transaction.reference,
+        status: true,
+        card: charge.card?..nullifyNumber(),
+        account: charge.account,
+        method: checkoutMethod(),
+        verify: true);
   }
 
   Future<CheckoutResponse> handleCardInput() {
-    throw UnsupportedError("Handling of card input not supported for Bank payment method");
+    throw UnsupportedError(
+        "Handling of card input not supported for Bank payment method");
   }
 
-  Future<CheckoutResponse> handleOtpInput(String otp, TransactionApiResponse? response);
+  Future<CheckoutResponse> handleOtpInput(
+      String otp, TransactionApiResponse? response);
 
   Future<CheckoutResponse> handlePinInput(String pin) {
     throw UnsupportedError("Pin Input not supported for ${checkoutMethod()}");
@@ -154,8 +196,10 @@ abstract class BaseTransactionManager {
 
   postInitiate();
 
-  Future<CheckoutResponse> handleBirthdayInput(String birthday, TransactionApiResponse response) {
-    throw UnsupportedError("Birthday Input not supported for ${checkoutMethod()}");
+  Future<CheckoutResponse> handleBirthdayInput(
+      String birthday, TransactionApiResponse response) {
+    throw UnsupportedError(
+        "Birthday Input not supported for ${checkoutMethod()}");
   }
 
   CheckoutMethod checkoutMethod();

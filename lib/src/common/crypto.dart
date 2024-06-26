@@ -1,14 +1,15 @@
 import 'dart:async';
 
 import 'package:flutter/services.dart';
-import 'package:paystack_flutter/src/common/utils.dart';
+import 'package:paystack_flutter_sa/src/common/utils.dart';
 
 class Crypto {
   static Future<String> encrypt(String data) async {
     var completer = Completer<String>();
 
     try {
-      String? result = await Utils.methodChannel.invokeMethod('getEncryptedData', {"stringData": data});
+      String? result = await Utils.methodChannel
+          .invokeMethod('getEncryptedData', {"stringData": data});
       completer.complete(result);
     } on PlatformException catch (e) {
       completer.completeError(e);

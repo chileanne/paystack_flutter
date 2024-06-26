@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:paystack_flutter/src/widgets/common/extensions.dart';
+import 'package:paystack_flutter_sa/src/widgets/common/extensions.dart';
 
 class WhiteButton extends _BaseButton {
   final bool flat;

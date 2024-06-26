@@ -1,11 +1,10 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:paystack_flutter/src/common/my_strings.dart';
-import 'package:paystack_flutter/src/common/utils.dart';
+import 'package:paystack_flutter_sa/src/common/my_strings.dart';
+import 'package:paystack_flutter_sa/src/common/utils.dart';
 
 void main() {
-  const MethodChannel channel =
-      MethodChannel('plugins.trushar/paystack_flutter');
+  const MethodChannel channel = MethodChannel('plugins.trushar/paystack_flutter_sa');
 
   TestWidgetsFlutterBinding.ensureInitialized();
 
@@ -29,8 +28,7 @@ void main() {
 
     group("#formatAmount", () {
       test("throws Error when currency formatter is not set", () {
-        expect(() => Utils.formatAmount(100),
-            throwsA(const TypeMatcher<String>()));
+        expect(() => Utils.formatAmount(100), throwsA(const TypeMatcher<String>()));
       });
 
       test("returns normally when currency formatter has been set", () {

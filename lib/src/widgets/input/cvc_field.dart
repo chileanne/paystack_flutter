@@ -1,24 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:paystack_flutter/src/common/my_strings.dart';
-import 'package:paystack_flutter/src/models/card.dart';
-import 'package:paystack_flutter/src/widgets/input/base_field.dart';
+import 'package:paystack_flutter_sa/src/common/my_strings.dart';
+import 'package:paystack_flutter_sa/src/models/card.dart';
+import 'package:paystack_flutter_sa/src/widgets/input/base_field.dart';
 
 class CVCField extends BaseTextField {
   CVCField({
-    Key? key,
+    super.key,
     required PaymentCard? card,
-    required FormFieldSetter<String> onSaved,
+    required FormFieldSetter<String> super.onSaved,
   }) : super(
-          key: key,
           labelText: 'CVV',
           hintText: '123',
-          onSaved: onSaved,
           validator: (String? value) => validateCVC(value, card),
           initialValue: card != null && card.cvc != null ? card.cvc.toString() : null,
           inputFormatters: [
             FilteringTextInputFormatter.digitsOnly,
-            new LengthLimitingTextInputFormatter(4),
+            LengthLimitingTextInputFormatter(4),
           ],
         );
 

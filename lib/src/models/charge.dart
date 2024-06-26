@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-import 'package:paystack_flutter/src/common/exceptions.dart';
-import 'package:paystack_flutter/src/common/my_strings.dart';
-import 'package:paystack_flutter/src/models/bank.dart';
-import 'package:paystack_flutter/src/models/card.dart';
+import 'package:paystack_flutter_sa/src/common/exceptions.dart';
+import 'package:paystack_flutter_sa/src/common/my_strings.dart';
+import 'package:paystack_flutter_sa/src/models/bank.dart';
+import 'package:paystack_flutter_sa/src/models/card.dart';
 
 class Charge {
   PaymentCard? card;
@@ -68,7 +68,12 @@ class Charge {
   }
 
   putCustomField(String displayName, String value) {
-    var customMap = {'value': value, 'display_name': displayName, 'variable_name': displayName.toLowerCase().replaceAll(RegExp(r'[^a-z0-9 ]'), "_")};
+    var customMap = {
+      'value': value,
+      'display_name': displayName,
+      'variable_name':
+          displayName.toLowerCase().replaceAll(RegExp(r'[^a-z0-9 ]'), "_")
+    };
     _customFields!.add(customMap);
     _hasMeta = true;
   }

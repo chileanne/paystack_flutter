@@ -1,4 +1,4 @@
-import 'package:paystack_flutter/src/common/my_strings.dart';
+import 'package:paystack_flutter_sa/src/common/my_strings.dart';
 
 class PaystackException implements Exception {
   String? message;
@@ -43,5 +43,7 @@ class PaystackSdkNotInitializedException extends PaystackException {
 }
 
 class ProcessingException extends ChargeException {
-  ProcessingException() : super('A transaction is currently processing, please wait till it concludes before attempting a new charge.');
+  ProcessingException()
+      : super(
+            'A transaction is currently processing, please wait till it concludes before attempting a new charge.');
 }

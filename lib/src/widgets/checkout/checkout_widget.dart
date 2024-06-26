@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart' hide ErrorWidget;
-import 'package:paystack_flutter/src/api/service/contracts/banks_service_contract.dart';
-import 'package:paystack_flutter/src/api/service/contracts/cards_service_contract.dart';
-import 'package:paystack_flutter/src/common/paystack.dart';
-import 'package:paystack_flutter/src/common/utils.dart';
-import 'package:paystack_flutter/src/models/card.dart';
-import 'package:paystack_flutter/src/models/charge.dart';
-import 'package:paystack_flutter/src/models/checkout_response.dart';
-import 'package:paystack_flutter/src/widgets/base_widget.dart';
-import 'package:paystack_flutter/src/widgets/checkout/bank_checkout.dart';
-import 'package:paystack_flutter/src/widgets/checkout/card_checkout.dart';
-import 'package:paystack_flutter/src/widgets/checkout/checkout_method.dart';
-import 'package:paystack_flutter/src/widgets/common/extensions.dart';
-import 'package:paystack_flutter/src/widgets/custom_dialog.dart';
-import 'package:paystack_flutter/src/widgets/error_widget.dart';
-import 'package:paystack_flutter/src/widgets/sucessful_widget.dart';
+import 'package:paystack_flutter_sa/src/api/service/contracts/banks_service_contract.dart';
+import 'package:paystack_flutter_sa/src/api/service/contracts/cards_service_contract.dart';
+import 'package:paystack_flutter_sa/src/common/paystack.dart';
+import 'package:paystack_flutter_sa/src/common/utils.dart';
+import 'package:paystack_flutter_sa/src/models/card.dart';
+import 'package:paystack_flutter_sa/src/models/charge.dart';
+import 'package:paystack_flutter_sa/src/models/checkout_response.dart';
+import 'package:paystack_flutter_sa/src/widgets/base_widget.dart';
+import 'package:paystack_flutter_sa/src/widgets/checkout/bank_checkout.dart';
+import 'package:paystack_flutter_sa/src/widgets/checkout/card_checkout.dart';
+import 'package:paystack_flutter_sa/src/widgets/checkout/checkout_method.dart';
+import 'package:paystack_flutter_sa/src/widgets/common/extensions.dart';
+import 'package:paystack_flutter_sa/src/widgets/custom_dialog.dart';
+import 'package:paystack_flutter_sa/src/widgets/error_widget.dart';
+import 'package:paystack_flutter_sa/src/widgets/sucessful_widget.dart';
 
 const kFullTabHeight = 74.0;
 
@@ -115,14 +115,14 @@ class _CheckoutWidgetState extends BaseState<CheckoutWidget> with TickerProvider
                 child: Image.asset(
                   'assets/images/paystack_icon.png',
                   key: const Key("PaystackBottomIcon"),
-                  package: 'paystack_flutter',
+                  package: 'paystack_flutter_sa',
                   height: 16,
                 ),
               ),
             Image.asset(
               'assets/images/paystack.png',
               key: const Key("PaystackLogo"),
-              package: 'paystack_flutter',
+              package: 'paystack_flutter_sa',
               height: 15,
             )
           ],
@@ -204,7 +204,7 @@ class _CheckoutWidgetState extends BaseState<CheckoutWidget> with TickerProvider
                 Image.asset(
                   'assets/images/paystack_icon.png',
                   key: const Key("PaystackIcon"),
-                  package: 'paystack_flutter',
+                  package: 'paystack_flutter_sa',
                   width: 25,
                 )
               else

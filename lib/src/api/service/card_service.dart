@@ -3,19 +3,20 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
-import 'package:paystack_flutter/src/api/model/transaction_api_response.dart';
-import 'package:paystack_flutter/src/api/service/base_service.dart';
-import 'package:paystack_flutter/src/api/service/contracts/cards_service_contract.dart';
-import 'package:paystack_flutter/src/common/exceptions.dart';
-import 'package:paystack_flutter/src/common/extensions.dart';
-import 'package:paystack_flutter/src/common/my_strings.dart';
+import 'package:paystack_flutter_sa/src/api/model/transaction_api_response.dart';
+import 'package:paystack_flutter_sa/src/api/service/base_service.dart';
+import 'package:paystack_flutter_sa/src/api/service/contracts/cards_service_contract.dart';
+import 'package:paystack_flutter_sa/src/common/exceptions.dart';
+import 'package:paystack_flutter_sa/src/common/extensions.dart';
+import 'package:paystack_flutter_sa/src/common/my_strings.dart';
 
 class CardService with BaseApiService implements CardServiceContract {
   @override
   Future<TransactionApiResponse> chargeCard(Map<String, String?> fields) async {
     var url = '$baseUrl/charge/mobile_charge';
 
-    http.Response response = await http.post(url.toUri(), body: fields, headers: headers);
+    http.Response response =
+        await http.post(url.toUri(), body: fields, headers: headers);
     var body = response.body;
 
     var statusCode = response.statusCode;
@@ -32,10 +33,12 @@ class CardService with BaseApiService implements CardServiceContract {
   }
 
   @override
-  Future<TransactionApiResponse> validateCharge(Map<String, String?> fields) async {
+  Future<TransactionApiResponse> validateCharge(
+      Map<String, String?> fields) async {
     var url = '$baseUrl/charge/validate';
 
-    http.Response response = await http.post(url.toUri(), body: fields, headers: headers);
+    http.Response response =
+        await http.post(url.toUri(), body: fields, headers: headers);
     var body = response.body;
 
     var statusCode = response.statusCode;

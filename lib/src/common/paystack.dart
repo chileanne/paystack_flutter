@@ -2,18 +2,18 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:paystack_flutter/src/api/service/bank_service.dart';
-import 'package:paystack_flutter/src/api/service/card_service.dart';
-import 'package:paystack_flutter/src/common/exceptions.dart';
-import 'package:paystack_flutter/src/common/my_strings.dart';
-import 'package:paystack_flutter/src/common/platform_info.dart';
-import 'package:paystack_flutter/src/common/string_utils.dart';
-import 'package:paystack_flutter/src/common/utils.dart';
-import 'package:paystack_flutter/src/models/card.dart';
-import 'package:paystack_flutter/src/models/charge.dart';
-import 'package:paystack_flutter/src/models/checkout_response.dart';
-import 'package:paystack_flutter/src/transaction/card_transaction_manager.dart';
-import 'package:paystack_flutter/src/widgets/checkout/checkout_widget.dart';
+import 'package:paystack_flutter_sa/src/api/service/bank_service.dart';
+import 'package:paystack_flutter_sa/src/api/service/card_service.dart';
+import 'package:paystack_flutter_sa/src/common/exceptions.dart';
+import 'package:paystack_flutter_sa/src/common/my_strings.dart';
+import 'package:paystack_flutter_sa/src/common/platform_info.dart';
+import 'package:paystack_flutter_sa/src/common/string_utils.dart';
+import 'package:paystack_flutter_sa/src/common/utils.dart';
+import 'package:paystack_flutter_sa/src/models/card.dart';
+import 'package:paystack_flutter_sa/src/models/charge.dart';
+import 'package:paystack_flutter_sa/src/models/checkout_response.dart';
+import 'package:paystack_flutter_sa/src/transaction/card_transaction_manager.dart';
+import 'package:paystack_flutter_sa/src/widgets/checkout/checkout_widget.dart';
 
 class PaystackPlugin {
   bool _sdkInitialized = false;
@@ -77,7 +77,8 @@ class PaystackPlugin {
   ///
   /// [charge] - the charge object.
 
-  Future<CheckoutResponse> chargeCard(BuildContext context, {required Charge charge}) {
+  Future<CheckoutResponse> chargeCard(BuildContext context,
+      {required Charge charge}) {
     _performChecks();
 
     return _Paystack(publicKey).chargeCard(context: context, charge: charge);
@@ -139,7 +140,8 @@ class PaystackPlugin {
 
   _validateSdkInitialized() {
     if (!sdkInitialized) {
-      throw PaystackSdkNotInitializedException('Paystack SDK has not been initialized. The SDK has'
+      throw PaystackSdkNotInitializedException(
+          'Paystack SDK has not been initialized. The SDK has'
           ' to be initialized before use');
     }
   }
@@ -150,8 +152,14 @@ class _Paystack {
 
   _Paystack(this.publicKey);
 
-  Future<CheckoutResponse> chargeCard({required BuildContext context, required Charge charge}) {
-    return CardTransactionManager(service: CardService(), charge: charge, context: context, publicKey: publicKey).chargeCard();
+  Future<CheckoutResponse> chargeCard(
+      {required BuildContext context, required Charge charge}) {
+    return CardTransactionManager(
+            service: CardService(),
+            charge: charge,
+            context: context,
+            publicKey: publicKey)
+        .chargeCard();
   }
 
   Future<CheckoutResponse> checkout(
@@ -209,7 +217,9 @@ class _Paystack {
   }
 }
 
-typedef OnTransactionChange<Transaction> = void Function(Transaction transaction);
-typedef OnTransactionError<Object, Transaction> = void Function(Object e, Transaction transaction);
+typedef OnTransactionChange<Transaction> = void Function(
+    Transaction transaction);
+typedef OnTransactionError<Object, Transaction> = void Function(
+    Object e, Transaction transaction);
 
 enum CheckoutMethod { card, bank, selectable }

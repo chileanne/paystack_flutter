@@ -2,8 +2,7 @@ import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
 class Utils {
-  static const MethodChannel methodChannel =
-      MethodChannel('plugins.trushar/paystack_flutter');
+  static const MethodChannel methodChannel = MethodChannel('plugins.trushar/paystack_flutter_sa');
 
   static String getKeyErrorMsg(String keyType) {
     return 'Invalid $keyType key. You must use a valid $keyType key. Ensure that you '
@@ -12,9 +11,7 @@ class Utils {
 
   static NumberFormat? _currencyFormatter;
 
-  static setCurrencyFormatter(String? currency, String? locale) =>
-      _currencyFormatter =
-          NumberFormat.currency(locale: locale, name: '$currency\u{0020}');
+  static setCurrencyFormatter(String? currency, String? locale) => _currencyFormatter = NumberFormat.currency(locale: locale, name: '$currency\u{0020}');
 
   static String formatAmount(num amountInBase) {
     if (_currencyFormatter == null) throw "Currency formatter not initialized.";

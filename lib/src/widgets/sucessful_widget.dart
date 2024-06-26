@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:paystack_flutter/src/common/utils.dart';
-import 'package:paystack_flutter/src/widgets/animated_widget.dart';
-import 'package:paystack_flutter/src/widgets/common/extensions.dart';
+import 'package:paystack_flutter_sa/src/common/utils.dart';
+import 'package:paystack_flutter_sa/src/widgets/animated_widget.dart';
+import 'package:paystack_flutter_sa/src/widgets/common/extensions.dart';
 
 class SuccessfulWidget extends StatefulWidget {
   final int amount;
   final VoidCallback onCountdownComplete;
 
-  SuccessfulWidget({required this.amount, required this.onCountdownComplete});
+  const SuccessfulWidget({super.key, required this.amount, required this.onCountdownComplete});
 
   @override
   _SuccessfulWidgetState createState() {
-    return new _SuccessfulWidgetState();
+    return _SuccessfulWidgetState();
   }
 }
 
@@ -28,21 +28,21 @@ class _SuccessfulWidgetState extends State<SuccessfulWidget> with TickerProvider
   @override
   void initState() {
     super.initState();
-    _mainController = new AnimationController(
+    _mainController = AnimationController(
       duration: const Duration(milliseconds: 500),
       vsync: this,
     );
     _mainController.forward();
 
-    _countdownController = new AnimationController(
+    _countdownController = AnimationController(
       vsync: this,
-      duration: new Duration(seconds: kStartValue),
+      duration: const Duration(seconds: kStartValue),
     );
     _countdownController.addListener(() => setState(() {}));
-    _countdownAnim = new StepTween(begin: kStartValue, end: 0).animate(_countdownController);
+    _countdownAnim = StepTween(begin: kStartValue, end: 0).animate(_countdownController);
 
-    _opacityController = new AnimationController(vsync: this, duration: const Duration(milliseconds: 500));
-    _opacity = new CurvedAnimation(parent: _opacityController, curve: Curves.linear)
+    _opacityController = AnimationController(vsync: this, duration: const Duration(milliseconds: 500));
+    _opacity = CurvedAnimation(parent: _opacityController, curve: Curves.linear)
       ..addStatusListener((status) {
         if (status == AnimationStatus.completed) {
           _opacityController.reverse();
@@ -65,48 +65,48 @@ class _SuccessfulWidgetState extends State<SuccessfulWidget> with TickerProvider
   @override
   Widget build(BuildContext context) {
     final sceondaryColor = context.colorScheme().secondary;
-    return new Container(
-      child: new CustomAnimatedWidget(
+    return Container(
+      child: CustomAnimatedWidget(
         controller: _mainController,
-        child: new Column(
+        child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             sizedBox,
-            new Image.asset(
+            Image.asset(
               'assets/images/successful.png',
               color: sceondaryColor,
               width: 50.0,
-              package: 'paystack_flutter',
+              package: 'paystack_flutter_sa',
             ),
             sizedBox,
             Text(
               'Payment Successful',
               style: TextStyle(
-                color: context.textTheme().headline6?.color,
+                color: context.textTheme().titleLarge?.color,
                 fontWeight: FontWeight.w500,
                 fontSize: 16.0,
               ),
             ),
-            new SizedBox(
+            const SizedBox(
               height: 5.0,
             ),
             widget.amount.isNegative
-                ? new Container()
-                : new Text('You paid ${Utils.formatAmount(widget.amount)}',
+                ? Container()
+                : Text('You paid ${Utils.formatAmount(widget.amount)}',
                     style: TextStyle(
-                      color: context.textTheme().headline6?.color,
+                      color: context.textTheme().titleLarge?.color,
                       fontWeight: FontWeight.normal,
                       fontSize: 14.0,
                     )),
             sizedBox,
-            new FadeTransition(
+            FadeTransition(
               opacity: _opacity,
-              child: new Text(
+              child: Text(
                 _countdownAnim.value.toString(),
                 style: TextStyle(color: sceondaryColor, fontWeight: FontWeight.bold, fontSize: 25.0),
               ),
             ),
-            new SizedBox(
+            const SizedBox(
               height: 30.0,
             )
           ],

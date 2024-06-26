@@ -3,11 +3,11 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import 'package:paystack_flutter/paystack_flutter.dart';
-import 'package:paystack_flutter/src/api/service/contracts/cards_service_contract.dart';
-import 'package:paystack_flutter/src/common/utils.dart';
-import 'package:paystack_flutter/src/widgets/checkout/card_checkout.dart';
-import 'package:paystack_flutter/src/widgets/input/card_input.dart';
+import 'package:paystack_flutter_sa/paystack_flutter_sa.dart';
+import 'package:paystack_flutter_sa/src/api/service/contracts/cards_service_contract.dart';
+import 'package:paystack_flutter_sa/src/common/utils.dart';
+import 'package:paystack_flutter_sa/src/widgets/checkout/card_checkout.dart';
+import 'package:paystack_flutter_sa/src/widgets/input/card_input.dart';
 
 import '../../common/widget_builder.dart';
 

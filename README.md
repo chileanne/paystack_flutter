@@ -112,47 +112,6 @@ Just send the payment details to  `plugin.chargeCard`
 ```
 
 
-## :wrench: :nut_and_bolt: Validating Card Details
-You are expected but not required to build the UI for your users to enter their payment details.
-For easier validation, wrap the **TextFormField**s inside a **Form** widget. Please check this article on
-[validating forms on Flutter](https://medium.freecodecamp.org/how-to-validate-forms-and-user-input-the-easy-way-using-flutter-e301a1531165)
-if this is new to you.
-
-**NOTE:** You don't have to pass a card object to ``Charge``. The plugin will call-up a UI for the user to input their card.
-
-You can validate the fields with these methods:
-#### card.validNumber
-This method helps to perform a check if the card number is valid.
-
-#### card.validCVC
-Method that checks if the card security code is valid.
-
-#### card.validExpiryDate
-Method checks if the expiry date (combination of year and month) is valid.
-
-#### card.isValid
-Method to check if the card is valid. Always do this check, before charging the card.
-
-
-#### card.getType
-This method returns an estimate of the string representation of the card type(issuer).
-
-
-## :heavy_check_mark: Verifying Transactions
-This is quite easy. Just send a HTTP GET request to `https://api.paystack.co/transaction/verify/$[TRANSACTION_REFERENCE]`.
-Please, check the  [official documentaion](https://developers.paystack.co/reference#verifying-transactions) on verifying transactions.
-
-## :helicopter: Testing your implementation
-Paystack provides tons of [payment cards](https://developers.paystack.co/docs/test-cards) for testing.
-
-## :arrow_forward: Running Example project
-For help getting started with Flutter, view the online [documentation](https://flutter.io/).
-
-An [example project](https://github.com/Trushar88/paystack_flutter/tree/main/example) has been provided in this plugin.
-Clone this repo and navigate to the **example** folder. Open it with a supported IDE or execute `flutter run` from that folder in terminal.
-
-
-
 
 ## Support
 

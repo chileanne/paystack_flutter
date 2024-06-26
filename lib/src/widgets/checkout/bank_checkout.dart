@@ -2,18 +2,18 @@ import 'dart:async';
 
 import 'package:async/async.dart';
 import 'package:flutter/material.dart';
-import 'package:paystack_flutter/src/api/service/bank_service.dart';
-import 'package:paystack_flutter/src/api/service/contracts/banks_service_contract.dart';
-import 'package:paystack_flutter/src/common/paystack.dart';
-import 'package:paystack_flutter/src/models/bank.dart';
-import 'package:paystack_flutter/src/models/charge.dart';
-import 'package:paystack_flutter/src/models/checkout_response.dart';
-import 'package:paystack_flutter/src/transaction/bank_transaction_manager.dart';
-import 'package:paystack_flutter/src/widgets/buttons.dart';
-import 'package:paystack_flutter/src/widgets/checkout/base_checkout.dart';
-import 'package:paystack_flutter/src/widgets/checkout/checkout_widget.dart';
-import 'package:paystack_flutter/src/widgets/common/extensions.dart';
-import 'package:paystack_flutter/src/widgets/input/account_field.dart';
+import 'package:paystack_flutter_sa/src/api/service/bank_service.dart';
+import 'package:paystack_flutter_sa/src/api/service/contracts/banks_service_contract.dart';
+import 'package:paystack_flutter_sa/src/common/paystack.dart';
+import 'package:paystack_flutter_sa/src/models/bank.dart';
+import 'package:paystack_flutter_sa/src/models/charge.dart';
+import 'package:paystack_flutter_sa/src/models/checkout_response.dart';
+import 'package:paystack_flutter_sa/src/transaction/bank_transaction_manager.dart';
+import 'package:paystack_flutter_sa/src/widgets/buttons.dart';
+import 'package:paystack_flutter_sa/src/widgets/checkout/base_checkout.dart';
+import 'package:paystack_flutter_sa/src/widgets/checkout/checkout_widget.dart';
+import 'package:paystack_flutter_sa/src/widgets/common/extensions.dart';
+import 'package:paystack_flutter_sa/src/widgets/input/account_field.dart';
 
 class BankCheckout extends StatefulWidget {
   final Charge charge;

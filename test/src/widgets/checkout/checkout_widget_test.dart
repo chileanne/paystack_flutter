@@ -3,10 +3,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import 'package:paystack_flutter/paystack_flutter.dart';
-import 'package:paystack_flutter/src/api/service/contracts/banks_service_contract.dart';
-import 'package:paystack_flutter/src/api/service/contracts/cards_service_contract.dart';
-import 'package:paystack_flutter/src/widgets/checkout/checkout_widget.dart';
+import 'package:paystack_flutter_sa/paystack_flutter_sa.dart';
+import 'package:paystack_flutter_sa/src/api/service/contracts/banks_service_contract.dart';
+import 'package:paystack_flutter_sa/src/api/service/contracts/cards_service_contract.dart';
+import 'package:paystack_flutter_sa/src/widgets/checkout/checkout_widget.dart';
 
 import '../../common/widget_builder.dart';
 

@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:paystack_flutter/src/common/my_strings.dart';
-import 'package:paystack_flutter/src/widgets/input/base_field.dart';
+import 'package:paystack_flutter_sa/src/common/my_strings.dart';
+import 'package:paystack_flutter_sa/src/widgets/input/base_field.dart';
 
 class AccountField extends BaseTextField {
-  AccountField({required FormFieldSetter<String> onSaved})
+  AccountField({super.key, required FormFieldSetter<String> onSaved})
       : super(
           labelText: 'Bank Account Number(10 digits)',
           validator: _validate,
           onSaved: onSaved,
           inputFormatters: [
             FilteringTextInputFormatter.digitsOnly,
-            new LengthLimitingTextInputFormatter(10),
+            LengthLimitingTextInputFormatter(10),
           ],
         );
 

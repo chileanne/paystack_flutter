@@ -1,20 +1,24 @@
 import 'dart:async';
 
-import 'package:paystack_flutter/src/api/model/transaction_api_response.dart';
-import 'package:paystack_flutter/src/api/request/bank_charge_request_body.dart';
-import 'package:paystack_flutter/src/api/service/contracts/banks_service_contract.dart';
-import 'package:paystack_flutter/src/common/exceptions.dart';
-import 'package:paystack_flutter/src/common/my_strings.dart';
-import 'package:paystack_flutter/src/common/paystack.dart';
-import 'package:paystack_flutter/src/models/charge.dart';
-import 'package:paystack_flutter/src/models/checkout_response.dart';
-import 'package:paystack_flutter/src/transaction/base_transaction_manager.dart';
+import 'package:paystack_flutter_sa/src/api/model/transaction_api_response.dart';
+import 'package:paystack_flutter_sa/src/api/request/bank_charge_request_body.dart';
+import 'package:paystack_flutter_sa/src/api/service/contracts/banks_service_contract.dart';
+import 'package:paystack_flutter_sa/src/common/exceptions.dart';
+import 'package:paystack_flutter_sa/src/common/my_strings.dart';
+import 'package:paystack_flutter_sa/src/common/paystack.dart';
+import 'package:paystack_flutter_sa/src/models/charge.dart';
+import 'package:paystack_flutter_sa/src/models/checkout_response.dart';
+import 'package:paystack_flutter_sa/src/transaction/base_transaction_manager.dart';
 
 class BankTransactionManager extends BaseTransactionManager {
   BankChargeRequestBody? chargeRequestBody;
   final BankServiceContract service;
 
-  BankTransactionManager({required this.service, required Charge super.charge, required super.context, required super.publicKey});
+  BankTransactionManager(
+      {required this.service,
+      required Charge super.charge,
+      required super.context,
+      required super.publicKey});
 
   Future<CheckoutResponse> chargeBank() async {
     await initiate();
@@ -42,17 +46,20 @@ class BankTransactionManager extends BaseTransactionManager {
   }
 
   Future<CheckoutResponse> _chargeAccount() {
-    Future<TransactionApiResponse> future = service.chargeBank(chargeRequestBody);
+    Future<TransactionApiResponse> future =
+        service.chargeBank(chargeRequestBody);
     return handleServerResponse(future);
   }
 
   Future<CheckoutResponse> _sendTokenToServer() {
-    Future<TransactionApiResponse> future = service.validateToken(chargeRequestBody, chargeRequestBody!.tokenParams());
+    Future<TransactionApiResponse> future = service.validateToken(
+        chargeRequestBody, chargeRequestBody!.tokenParams());
     return handleServerResponse(future);
   }
 
   @override
-  Future<CheckoutResponse> handleApiResponse(TransactionApiResponse response) async {
+  Future<CheckoutResponse> handleApiResponse(
+      TransactionApiResponse response) async {
     var auth = response.auth;
 
     if (response.status == 'success') {
@@ -72,17 +79,20 @@ class BankTransactionManager extends BaseTransactionManager {
       return getOtpFrmUI(response: response);
     }
 
-    return notifyProcessingError(PaystackException(response.message ?? Strings.unKnownResponse));
+    return notifyProcessingError(
+        PaystackException(response.message ?? Strings.unKnownResponse));
   }
 
   @override
-  Future<CheckoutResponse> handleOtpInput(String token, TransactionApiResponse? response) {
+  Future<CheckoutResponse> handleOtpInput(
+      String token, TransactionApiResponse? response) {
     chargeRequestBody!.token = token;
     return _sendTokenToServer();
   }
 
   @override
-  Future<CheckoutResponse> handleBirthdayInput(String birthday, TransactionApiResponse response) {
+  Future<CheckoutResponse> handleBirthdayInput(
+      String birthday, TransactionApiResponse response) {
     chargeRequestBody!.birthday = birthday;
     return _chargeAccount();
   }

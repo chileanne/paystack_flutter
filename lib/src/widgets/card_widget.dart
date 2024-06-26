@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:paystack_flutter/src/models/card.dart';
-import 'package:paystack_flutter/src/widgets/base_widget.dart';
-import 'package:paystack_flutter/src/widgets/buttons.dart';
-import 'package:paystack_flutter/src/widgets/custom_dialog.dart';
-import 'package:paystack_flutter/src/widgets/input/card_input.dart';
+import 'package:paystack_flutter_sa/src/models/card.dart';
+import 'package:paystack_flutter_sa/src/widgets/base_widget.dart';
+import 'package:paystack_flutter_sa/src/widgets/buttons.dart';
+import 'package:paystack_flutter_sa/src/widgets/custom_dialog.dart';
+import 'package:paystack_flutter_sa/src/widgets/input/card_input.dart';
 
 class CardInputWidget extends StatefulWidget {
   final PaymentCard? card;
 
-  CardInputWidget(this.card);
+  const CardInputWidget(this.card, {super.key});
 
   @override
   _CardInputWidgetState createState() {
-    return new _CardInputWidgetState();
+    return _CardInputWidgetState();
   }
 }
 
@@ -25,32 +25,32 @@ class _CardInputWidgetState extends BaseState<CardInputWidget> {
 
   @override
   Widget buildChild(BuildContext context) {
-    return new CustomAlertDialog(
-      content: new SingleChildScrollView(
-        child: new Container(
+    return CustomAlertDialog(
+      content: SingleChildScrollView(
+        child: Container(
           padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
           alignment: Alignment.center,
-          child: new Column(
+          child: Column(
             children: <Widget>[
-              new Text(
+              const Text(
                 'Please, provide valid card details.',
                 textAlign: TextAlign.center,
-                style: const TextStyle(fontWeight: FontWeight.w500),
+                style: TextStyle(fontWeight: FontWeight.w500),
               ),
-              new SizedBox(
+              const SizedBox(
                 height: 35.0,
               ),
-              new CardInput(
+              CardInput(
                 buttonText: 'Continue',
                 card: widget.card,
                 onValidated: _onCardValidated,
               ),
-              new SizedBox(
+              const SizedBox(
                 height: 10.0,
               ),
-              new Container(
+              Container(
                 padding: const EdgeInsets.only(top: 10.0),
-                child: new WhiteButton(
+                child: WhiteButton(
                   onPressed: onCancelPress,
                   text: 'Cancel',
                   flat: true,

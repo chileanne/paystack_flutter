@@ -1,6 +1,6 @@
-import 'package:paystack_flutter/src/common/exceptions.dart';
-import 'package:paystack_flutter/src/common/string_utils.dart';
-import 'package:paystack_flutter/src/models/card.dart';
+import 'package:paystack_flutter_sa/src/common/exceptions.dart';
+import 'package:paystack_flutter_sa/src/common/string_utils.dart';
+import 'package:paystack_flutter_sa/src/models/card.dart';
 
 class CardUtils {
   static bool isWholeNumberPositive(String? value) {
@@ -27,7 +27,8 @@ class CardUtils {
     // 1. The year is in the past. In that case, we just assume that the month
     // has passed
     // 2. Card's month (plus another month) is more than current month.
-    return hasYearPassed(year) || convertYearTo4Digits(year) == now.year && (month < now.month + 1);
+    return hasYearPassed(year) ||
+        convertYearTo4Digits(year) == now.year && (month < now.month + 1);
   }
 
   static bool isValidMonth(int? month) {
@@ -99,7 +100,12 @@ class CardUtils {
     int expiryMonth = card.expiryMonth ?? 0;
     int expiryYear = card.expiryYear ?? 0;
 
-    var cardFields = [number, cvc, expiryMonth.toString(), expiryYear.toString()];
+    var cardFields = [
+      number,
+      cvc,
+      expiryMonth.toString(),
+      expiryYear.toString()
+    ];
 
     if (!StringUtils.isEmpty(number)) {
       return cardFields.join("*");

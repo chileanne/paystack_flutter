@@ -2,11 +2,10 @@ import 'dart:io';
 
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:paystack_flutter/src/common/paystack.dart';
+import 'package:paystack_flutter_sa/src/common/paystack.dart';
 
 void main() {
-  const MethodChannel channel =
-      MethodChannel('plugins.trushar/paystack_flutter');
+  const MethodChannel channel = MethodChannel('plugins.trushar/paystack_flutter_sa');
 
   TestWidgetsFlutterBinding.ensureInitialized();
 

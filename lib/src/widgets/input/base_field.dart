@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:paystack_flutter/src/widgets/common/extensions.dart';
+import 'package:paystack_flutter_sa/src/widgets/common/extensions.dart';
 
 class BaseTextField extends StatelessWidget {
   final Widget? suffix;
@@ -12,8 +12,8 @@ class BaseTextField extends StatelessWidget {
   final TextEditingController? controller;
   final String? initialValue;
 
-  BaseTextField({
-    Key? key,
+  const BaseTextField({
+    super.key,
     this.suffix,
     this.labelText,
     this.hintText,
@@ -22,7 +22,7 @@ class BaseTextField extends StatelessWidget {
     this.validator,
     this.controller,
     this.initialValue,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -34,20 +34,20 @@ class BaseTextField extends StatelessWidget {
       maxLines: 1,
       initialValue: initialValue,
       keyboardType: TextInputType.number,
-      decoration: new InputDecoration(
-        border: OutlineInputBorder(),
+      decoration: InputDecoration(
+        border: const OutlineInputBorder(),
         labelText: labelText,
         labelStyle: const TextStyle(color: Colors.grey, fontSize: 14.0),
         suffixIcon: suffix == null
             ? null
-            : new Padding(
+            : Padding(
                 padding: const EdgeInsetsDirectional.only(end: 12.0),
                 child: suffix,
               ),
         errorStyle: const TextStyle(fontSize: 12.0),
         errorMaxLines: 3,
         isDense: true,
-        enabledBorder: OutlineInputBorder(borderSide: const BorderSide(color: Colors.grey, width: 0.5)),
+        enabledBorder: const OutlineInputBorder(borderSide: BorderSide(color: Colors.grey, width: 0.5)),
         focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: context.colorScheme().secondary, width: 1.0)),
         hintText: hintText,
       ),

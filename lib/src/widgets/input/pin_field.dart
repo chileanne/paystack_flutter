@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:paystack_flutter/src/widgets/common/extensions.dart';
+import 'package:paystack_flutter_sa/src/widgets/common/extensions.dart';
 
 class PinField extends StatefulWidget {
   final ValueChanged<String>? onSaved;

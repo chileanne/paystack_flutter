@@ -1,4 +1,4 @@
-import 'package:paystack_flutter/src/api/request/base_request_body.dart';
+import 'package:paystack_flutter_sa/src/api/request/base_request_body.dart';
 
 class ValidateRequestBody extends BaseRequestBody {
   final String _fieldTrans = 'trans';

@@ -1,7 +1,7 @@
-import 'package:paystack_flutter/src/common/my_strings.dart';
-import 'package:paystack_flutter/src/common/paystack.dart';
-import 'package:paystack_flutter/src/models/bank.dart';
-import 'package:paystack_flutter/src/models/card.dart';
+import 'package:paystack_flutter_sa/src/common/my_strings.dart';
+import 'package:paystack_flutter_sa/src/common/paystack.dart';
+import 'package:paystack_flutter_sa/src/models/bank.dart';
+import 'package:paystack_flutter_sa/src/models/card.dart';
 
 class CheckoutResponse {
   /// A user readable message. If the transaction was not successful, this returns the
@@ -38,7 +38,15 @@ class CheckoutResponse {
         verify = false,
         method = CheckoutMethod.selectable;
 
-  CheckoutResponse({required this.message, required this.reference, required this.status, required this.method, required this.verify, this.card, this.account}) : assert(card != null || account != null);
+  CheckoutResponse(
+      {required this.message,
+      required this.reference,
+      required this.status,
+      required this.method,
+      required this.verify,
+      this.card,
+      this.account})
+      : assert(card != null || account != null);
 
   @override
   String toString() {

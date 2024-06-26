@@ -1,4 +1,4 @@
-import 'package:paystack_flutter/src/api/model/api_response.dart';
+import 'package:paystack_flutter_sa/src/api/model/api_response.dart';
 
 class TransactionApiResponse extends ApiResponse {
   String? reference;
@@ -23,7 +23,8 @@ class TransactionApiResponse extends ApiResponse {
     otpMessage = map['otpmessage'];
     status = map['status'];
     message = map['message'];
-    displayText = !map.containsKey('display_text') ? message : map['display_text'];
+    displayText =
+        !map.containsKey('display_text') ? message : map['display_text'];
 
     if (status != null) {
       status = status!.toLowerCase();

@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:paystack_flutter/paystack_flutter.dart';
+import 'package:paystack_flutter_sa/paystack_flutter_sa.dart';
 
 // To get started quickly, change this to your heroku deployment of
 // https://github.com/PaystackHQ/sample-charge-card-backend
@@ -81,22 +81,20 @@ class _HomePageState extends State<HomePage> {
                       child: const Text('Initalize transaction from:'),
                     ),
                     new Expanded(
-                      child: new Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
-                            new RadioListTile<int>(
-                              value: 0,
-                              groupValue: _radioValue,
-                              onChanged: _handleRadioValueChanged,
-                              title: const Text('Local'),
-                            ),
-                            new RadioListTile<int>(
-                              value: 1,
-                              groupValue: _radioValue,
-                              onChanged: _handleRadioValueChanged,
-                              title: const Text('Server'),
-                            ),
-                          ]),
+                      child: new Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
+                        new RadioListTile<int>(
+                          value: 0,
+                          groupValue: _radioValue,
+                          onChanged: _handleRadioValueChanged,
+                          title: const Text('Local'),
+                        ),
+                        new RadioListTile<int>(
+                          value: 1,
+                          groupValue: _radioValue,
+                          onChanged: _handleRadioValueChanged,
+                          title: const Text('Server'),
+                        ),
+                      ]),
                     )
                   ],
                 ),
@@ -130,8 +128,7 @@ class _HomePageState extends State<HomePage> {
                           border: const UnderlineInputBorder(),
                           labelText: 'Expiry Month',
                         ),
-                        onSaved: (String? value) =>
-                            _expiryMonth = int.tryParse(value ?? ""),
+                        onSaved: (String? value) => _expiryMonth = int.tryParse(value ?? ""),
                       ),
                     ),
                     _horizontalSizeBox,
@@ -141,8 +138,7 @@ class _HomePageState extends State<HomePage> {
                           border: const UnderlineInputBorder(),
                           labelText: 'Expiry Year',
                         ),
-                        onSaved: (String? value) =>
-                            _expiryYear = int.tryParse(value ?? ""),
+                        onSaved: (String? value) => _expiryYear = int.tryParse(value ?? ""),
                       ),
                     )
                   ],
@@ -150,13 +146,11 @@ class _HomePageState extends State<HomePage> {
                 _verticalSizeBox,
                 Theme(
                   data: Theme.of(context).copyWith(
-                    colorScheme: Theme.of(context)
-                        .colorScheme
-                        .copyWith(secondary: green),
+                    colorScheme: Theme.of(context).colorScheme.copyWith(secondary: green),
                     primaryColorLight: Colors.white,
                     primaryColorDark: navyBlue,
                     textTheme: Theme.of(context).textTheme.copyWith(
-                          bodyText2: TextStyle(
+                          bodyMedium: TextStyle(
                             color: lightBlue,
                           ),
                         ),
@@ -167,23 +161,19 @@ class _HomePageState extends State<HomePage> {
                           ? new Container(
                               alignment: Alignment.center,
                               height: 50.0,
-                              child: Platform.isIOS
-                                  ? new CupertinoActivityIndicator()
-                                  : new CircularProgressIndicator(),
+                              child: Platform.isIOS ? new CupertinoActivityIndicator() : new CircularProgressIndicator(),
                             )
                           : new Column(
                               mainAxisSize: MainAxisSize.min,
                               children: <Widget>[
-                                _getPlatformButton(
-                                    'Charge Card', () => _startAfreshCharge()),
+                                _getPlatformButton('Charge Card', () => _startAfreshCharge()),
                                 _verticalSizeBox,
                                 _border,
                                 new SizedBox(
                                   height: 40.0,
                                 ),
                                 new Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: <Widget>[
                                     new Flexible(
@@ -195,8 +185,7 @@ class _HomePageState extends State<HomePage> {
                                             isDense: true,
                                             hintText: 'Checkout method',
                                           ),
-                                          child: new DropdownButton<
-                                              CheckoutMethod>(
+                                          child: new DropdownButton<CheckoutMethod>(
                                             value: _method,
                                             isDense: true,
                                             onChanged: (CheckoutMethod? value) {
@@ -205,10 +194,8 @@ class _HomePageState extends State<HomePage> {
                                               }
                                             },
                                             items: banks.map((String value) {
-                                              return new DropdownMenuItem<
-                                                  CheckoutMethod>(
-                                                value:
-                                                    _parseStringToMethod(value),
+                                              return new DropdownMenuItem<CheckoutMethod>(
+                                                value: _parseStringToMethod(value),
                                                 child: new Text(value),
                                               );
                                             }).toList(),
@@ -435,19 +422,14 @@ class _HomePageState extends State<HomePage> {
   }
 
   _updateStatus(String? reference, String message) {
-    _showMessage('Reference: $reference \n\ Response: $message',
-        const Duration(seconds: 7));
+    _showMessage('Reference: $reference \n\ Response: $message', const Duration(seconds: 7));
   }
 
-  _showMessage(String message,
-      [Duration duration = const Duration(seconds: 4)]) {
+  _showMessage(String message, [Duration duration = const Duration(seconds: 4)]) {
     ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
       content: new Text(message),
       duration: duration,
-      action: new SnackBarAction(
-          label: 'CLOSE',
-          onPressed: () =>
-              ScaffoldMessenger.of(context).removeCurrentSnackBar()),
+      action: new SnackBarAction(label: 'CLOSE', onPressed: () => ScaffoldMessenger.of(context).removeCurrentSnackBar()),
     ));
   }
 

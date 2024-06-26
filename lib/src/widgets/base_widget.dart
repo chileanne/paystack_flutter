@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:paystack_flutter/src/models/checkout_response.dart';
+import 'package:paystack_flutter_sa/src/models/checkout_response.dart';
 
 abstract class BaseState<T extends StatefulWidget> extends State<T> {
   bool isProcessing = false;
@@ -12,7 +12,7 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
 
   @override
   Widget build(BuildContext context) {
-    return new WillPopScope(
+    return WillPopScope(
       onWillPop: _onWillPop,
       child: buildChild(context),
     );
@@ -31,38 +31,38 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
       return false;
     }
 
-    var text = new Text(confirmationMessage);
+    var text = Text(confirmationMessage);
 
     var dialog = Platform.isIOS
-        ? new CupertinoAlertDialog(
+        ? CupertinoAlertDialog(
             content: text,
             actions: <Widget>[
-              new CupertinoDialogAction(
-                child: const Text('Yes'),
+              CupertinoDialogAction(
                 isDestructiveAction: true,
                 onPressed: () {
                   Navigator.pop(context, true); // Returning true to
                   // _onWillPop will pop again.
                 },
+                child: const Text('Yes'),
               ),
-              new CupertinoDialogAction(
-                child: const Text('No'),
+              CupertinoDialogAction(
                 isDefaultAction: true,
                 onPressed: () {
                   Navigator.pop(context, false); // Pops the confirmation dialog but not the page.
                 },
+                child: const Text('No'),
               ),
             ],
           )
-        : new AlertDialog(
+        : AlertDialog(
             content: text,
             actions: <Widget>[
-              new TextButton(
+              TextButton(
                   child: const Text('NO'),
                   onPressed: () {
                     Navigator.of(context).pop(false); // Pops the confirmation dialog but not the page.
                   }),
-              new TextButton(
+              TextButton(
                   child: const Text('YES'),
                   onPressed: () {
                     Navigator.of(context).pop(true); // Returning true to _onWillPop will pop again.

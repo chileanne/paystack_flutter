@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:paystack_flutter/paystack_flutter.dart';
-import 'package:paystack_flutter/src/common/card_utils.dart';
+import 'package:paystack_flutter_sa/paystack_flutter_sa.dart';
+import 'package:paystack_flutter_sa/src/common/card_utils.dart';
 
 import 'case.dart';
 

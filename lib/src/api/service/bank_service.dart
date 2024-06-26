@@ -4,19 +4,20 @@ import 'dart:io';
 
 import 'package:async/async.dart';
 import 'package:http/http.dart' as http;
-import 'package:paystack_flutter/src/api/model/transaction_api_response.dart';
-import 'package:paystack_flutter/src/api/request/bank_charge_request_body.dart';
-import 'package:paystack_flutter/src/api/service/base_service.dart';
-import 'package:paystack_flutter/src/api/service/contracts/banks_service_contract.dart';
-import 'package:paystack_flutter/src/common/exceptions.dart';
-import 'package:paystack_flutter/src/common/extensions.dart';
-import 'package:paystack_flutter/src/common/my_strings.dart';
-import 'package:paystack_flutter/src/models/bank.dart';
+import 'package:paystack_flutter_sa/src/api/model/transaction_api_response.dart';
+import 'package:paystack_flutter_sa/src/api/request/bank_charge_request_body.dart';
+import 'package:paystack_flutter_sa/src/api/service/base_service.dart';
+import 'package:paystack_flutter_sa/src/api/service/contracts/banks_service_contract.dart';
+import 'package:paystack_flutter_sa/src/common/exceptions.dart';
+import 'package:paystack_flutter_sa/src/common/extensions.dart';
+import 'package:paystack_flutter_sa/src/common/my_strings.dart';
+import 'package:paystack_flutter_sa/src/models/bank.dart';
 
 class BankService with BaseApiService implements BankServiceContract {
   @override
   Future<String?> getTransactionId(String? accessCode) async {
-    var url = 'https://api.paystack.co/transaction/verify_access_code/$accessCode';
+    var url =
+        'https://api.paystack.co/transaction/verify_access_code/$accessCode';
     try {
       http.Response response = await http.get(url.toUri());
       Map responseBody = jsonDecode(response.body);
@@ -29,19 +30,25 @@ class BankService with BaseApiService implements BankServiceContract {
   }
 
   @override
-  Future<TransactionApiResponse> chargeBank(BankChargeRequestBody? requestBody) async {
-    var url = '$baseUrl/bank/charge_account/${requestBody!.account.bank!.id}/${requestBody.transactionId}';
+  Future<TransactionApiResponse> chargeBank(
+      BankChargeRequestBody? requestBody) async {
+    var url =
+        '$baseUrl/bank/charge_account/${requestBody!.account.bank!.id}/${requestBody.transactionId}';
     return _getChargeFuture(url, fields: requestBody.paramsMap());
   }
 
   @override
-  Future<TransactionApiResponse> validateToken(BankChargeRequestBody? requestBody, Map<String, String?> fields) async {
-    var url = '$baseUrl/bank/validate_token/${requestBody!.account.bank!.id}/${requestBody.transactionId}';
+  Future<TransactionApiResponse> validateToken(
+      BankChargeRequestBody? requestBody, Map<String, String?> fields) async {
+    var url =
+        '$baseUrl/bank/validate_token/${requestBody!.account.bank!.id}/${requestBody.transactionId}';
     return _getChargeFuture(url, fields: fields);
   }
 
-  Future<TransactionApiResponse> _getChargeFuture(String url, {var fields}) async {
-    http.Response response = await http.post(url.toUri(), body: fields, headers: headers);
+  Future<TransactionApiResponse> _getChargeFuture(String url,
+      {var fields}) async {
+    http.Response response =
+        await http.post(url.toUri(), body: fields, headers: headers);
     return _getResponseFuture(response);
   }
 

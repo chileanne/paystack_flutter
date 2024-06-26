@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:paystack_flutter/src/api/request/base_request_body.dart';
-import 'package:paystack_flutter/src/common/card_utils.dart';
-import 'package:paystack_flutter/src/common/crypto.dart';
-import 'package:paystack_flutter/src/models/charge.dart';
+import 'package:paystack_flutter_sa/src/api/request/base_request_body.dart';
+import 'package:paystack_flutter_sa/src/common/card_utils.dart';
+import 'package:paystack_flutter_sa/src/common/crypto.dart';
+import 'package:paystack_flutter_sa/src/models/charge.dart';
 
 class CardRequestBody extends BaseRequestBody {
   static const String fieldClientData = "clientdata";
@@ -44,7 +44,10 @@ class CardRequestBody extends BaseRequestBody {
         _amount = charge.amount.toString(),
         _reference = charge.reference,
         _subAccount = charge.subAccount,
-        _transactionCharge = charge.transactionCharge != null && charge.transactionCharge! > 0 ? charge.transactionCharge.toString() : null,
+        _transactionCharge =
+            charge.transactionCharge != null && charge.transactionCharge! > 0
+                ? charge.transactionCharge.toString()
+                : null,
         _bearer = charge.bearer != null ? getBearer(charge.bearer) : null,
         _metadata = charge.metadata,
         _plan = charge.plan,
@@ -52,8 +55,10 @@ class CardRequestBody extends BaseRequestBody {
         _accessCode = charge.accessCode,
         _additionalParameters = charge.additionalParameters;
 
-  static Future<CardRequestBody> getChargeRequestBody(String publicKey, Charge charge) async {
-    return Crypto.encrypt(CardUtils.concatenateCardFields(charge.card)).then((clientData) => CardRequestBody._(publicKey, charge, clientData));
+  static Future<CardRequestBody> getChargeRequestBody(
+      String publicKey, Charge charge) async {
+    return Crypto.encrypt(CardUtils.concatenateCardFields(charge.card))
+        .then((clientData) => CardRequestBody._(publicKey, charge, clientData));
   }
 
   addPin(String pin) async {
