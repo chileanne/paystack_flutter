@@ -1,12 +1,12 @@
 # :credit_card: Paystack Plugin for Flutter
 
 ## :rocket: Installation
-To use this plugin, add `paystack_flutter` as a [dependency in your pubspec.yaml file](https://flutter.io/platform-plugins/).
+To use this plugin, add `paystack_flutter_sa` as a [dependency in your pubspec.yaml file](https://flutter.io/platform-plugins/).
 
 Then initialize the plugin preferably in the `initState` of your widget.
 
 ``` dart
-import 'package:flutter_paystack/flutter_paystack.dart';
+import 'package:paystack_flutter_sa/paystack_flutter_sa.dart';
 
 class _PaymentPageState extends State<PaymentPage> {
   var publicKey = '[YOUR_PAYSTACK_PUBLIC_KEY]';
@@ -123,7 +123,7 @@ If you would like to contribute to the plugin (e.g. by improving the documentati
 
 ## Author
 
-This circular_progress_stack plugin for Flutter is developed by [Trushar Mistry](https://github.com/Trushar88).
+This paystack_flutter_sa plugin for Flutter is developed by [Trushar Mistry](https://github.com/Trushar88).
 
 ## Buy Me A Coffee
 

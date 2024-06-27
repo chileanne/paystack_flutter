@@ -2,8 +2,8 @@
 # To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html
 #
 Pod::Spec.new do |s|
-  s.name             = 'flutter_paystack'
-  s.version          = '0.0.1'
+  s.name             = 'paystack_flutter_sa'
+  s.version          = '1.0.2'
   s.summary          = 'A new Flutter plugin for paystack.'
   s.description      = <<-DESC
 A new Flutter plugin for paystack.
