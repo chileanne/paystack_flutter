@@ -3,7 +3,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'paystack_flutter_sa'
-  s.version          = '1.0.2'
+  s.version          = '1.0.3'
   s.summary          = 'A new Flutter plugin for paystack.'
   s.description      = <<-DESC
 A new Flutter plugin for paystack.
