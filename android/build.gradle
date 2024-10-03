@@ -27,6 +27,13 @@ apply plugin: 'kotlin-android'
 android {
     namespace = "co.paystack.paystackflutter"
     compileSdk = 34
+    ndkVersion = "26.1.10909125"
+
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
@@ -38,6 +45,9 @@ android {
         versionName "1.0.0"
     }
 
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 
 
 
