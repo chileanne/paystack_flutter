@@ -27,7 +27,7 @@ apply plugin: 'kotlin-android'
 android {
     namespace = "co.paystack.paystackflutter"
     compileSdk = 34
-    ndkVersion = "26.1.10909125"
+
 
 
     compileOptions {
